@@ -51,7 +51,7 @@ public class UserCtrl {
     public ModelAndView indexView(ModelAndView modelAndView, HttpSession session) {
         MyUser user = (MyUser) session.getAttribute("user");
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("movie/index");
+        modelAndView.setViewName("index");
         return modelAndView;
     }
 

@@ -118,10 +118,8 @@
             <hr>
             <div class="row justify-content-center">
               <div class="col-12 col-xl-8">
-                <div class="btn-group-variant"><a class="btn btn-info-2 btn-sm btn-icon" href="#"><span class="icon fa-facebook"></span> Facebook</a><a class="btn btn-info btn-sm btn-icon" href="#"><span class="icon fa-twitter"></span> Twitter</a><a class="btn btn-danger btn-sm btn-icon" href="#"><span class="icon fa-google-plus"></span> Google+</a></div>
                 <div class="row justify-content-center offset-custom-5">
                   <div class="col-xl-6 col-xl offset-custom-3">
-                    <p class="text-uppercase text-gray">or</p>
                     <form class="rd-mailform text-left">
                       <div class="form-wrap">
                         <label class="form-label" for="forms-sub-name">Username</label>
@@ -171,7 +169,6 @@
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
     <!-- coded by Starlight-->
-    <script src="js/jquery-3.1.1.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $('#login').click(function(event) {
@@ -199,7 +196,7 @@
 
           // 发送AJAX请求进行登录
           $.ajax({
-            url: "userCtrl/login",
+            url: "/userCtrl/login",
             type: "POST",
             data: param,
             dataType: "json", // 预期服务器返回的数据类型
@@ -207,7 +204,7 @@
               // 根据服务器返回的结果进行处理
               if (response.success) {
                 alert("登录成功");
-                window.location.href = "userCtrl/indexView";
+                window.location.href = "localhost:8080/userCtrl/indexView";
               } else {
                 alert("用户名或密码错误");
               }
