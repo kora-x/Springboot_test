@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.seiryo.springboot_test.mapper.UserMapper">
+    <!-- 设置返回的resultMap -->
+    <resultMap id="myuser" type="org.seiryo.springboot_test.pojo.MyUser" >
+        <id column="USER_ID" property="USER_ID"/>
+        <result column="USER_NAME" property="USER_NAME"/>
+        <result column="USER_PASS" property="USER_PASS"/>
+    </resultMap>
+    <!-- 查询所有用户信息（动态查询） -->
+    <select id="userList" resultMap="myuser">
+        SELECT * FROM My_User
+        <where>
+            <if test="USER_ID != null">
+                AND USER_ID = #{USER_ID}
+            </if>
+            <if test="USER_NAME != null">
+                AND USER_NAME = #{USER_NAME}
+            </if>
+            <if test="USER_PASS != null">
+                AND USER_PASS = #{USER_PASS}
+            </if>
+        </where>
+    </select>
+    <!-- 动态插入 -->
+    <insert id="insertUser">
+        INSERT INTO My_User
+        <include refid="insertSql_1"/>
+        VALUES
+        <include refid="insertSql_2"/>
+    </insert>
+
+    <!-- 自定义方法SQL1 -->
+    <sql id="insertSql_1">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            USER_NAME,USER_PASS
+        </trim>
+    </sql>
+
+    <!-- 自定义方法SQL2 -->
+    <sql id="insertSql_2">
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="USER_NAME != null">
+                #{USER_NAME},
+            </if>
+            <if test="USER_PASS != null">
+                #{USER_PASS},
+            </if>
+        </trim>
+    </sql>
+</mapper>
+
